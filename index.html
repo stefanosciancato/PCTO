@@ -1,0 +1,160 @@
+<html>
+<head>
+  <title>Gruppo 5 | PCTO 2025 - 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="bg-layer"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="lang-bar">
+    <div class="lang-slider" id="langSlider"></div>
+    <button class="lang-btn active" data-lang="it">🇮🇹 IT</button>
+    <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+    <button class="lang-btn" data-lang="cs">🇨🇿 CZ</button>
+  </div>
+
+  <div class="app-wrap">
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+      <div class="hero-badge" id="heroBadge">PCTO 2025 - 2026</div>
+      <span class="hero-logo" id="heroLogo">✦</span>
+      <h1 id="heroTitle">Gruppo <span>Cinque</span></h1>
+      <p class="hero-sub" id="heroSub">Progetti web realizzati durante il Percorso per le Competenze Trasversali e l'Orientamento</p>
+    </header>
+
+    <!-- ===== TEAM ===== -->
+    <div class="team-card">
+      <div class="team-header">
+        <span class="team-header-icon">👥</span>
+        <h2 id="teamTitle">Il nostro team</h2>
+        <span class="group-num" id="groupNum">Gruppo 5</span>
+      </div>
+      <div class="team-divider"></div>
+      <div class="team-grid">
+
+        <div class="member dev">
+          <div class="member-avatar">SS</div>
+          <div class="member-info">
+            <div class="member-name" id="name1">Stefano Sciancato</div>
+            <div class="member-role-badge dev-badge" id="role1">💻 Sviluppatore</div>
+          </div>
+        </div>
+
+        <div class="member">
+          <div class="member-avatar">CO</div>
+          <div class="member-info">
+            <div class="member-name" id="name2">Christian Orefice</div>
+            <div class="member-role-badge brain-badge" id="role2">💡 Brainstorming</div>
+          </div>
+        </div>
+
+        <div class="member">
+          <div class="member-avatar">GP</div>
+          <div class="member-info">
+            <div class="member-name" id="name3">Gabriele Pagano</div>
+            <div class="member-role-badge brain-badge" id="role3">🗣️ Presentatore</div>
+          </div>
+        </div>
+
+        <div class="member">
+          <div class="member-avatar">AV</div>
+          <div class="member-info">
+            <div class="member-name" id="name4">Antonio Vitolo</div>
+            <div class="member-role-badge brain-badge" id="role4">🔎 Ricercatori</div>
+          </div>
+        </div>
+
+        <div class="member">
+          <div class="member-avatar">CB</div>
+          <div class="member-info">
+            <div class="member-name" id="name5">Carlo Boemio</div>
+            <div class="member-role-badge brain-badge" id="role5">🔎 Ricercatori</div>
+          </div>
+        </div>
+
+        <div class="member">
+          <div class="member-avatar">CD</div>
+          <div class="member-info">
+            <div class="member-name" id="name6">Carmine Duro</div>
+            <div class="member-role-badge brain-badge" id="role6">🔎 Ricercatori</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== PROGETTI ===== -->
+    <section class="projects-section">
+      <div class="section-title" id="projectsTitle">I nostri progetti</div>
+
+      <div class="projects-grid">
+
+        <!-- TourPass -->
+        <a href="tuorpass\index.html" class="project-card">
+          <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1519922639192-e73293ca430e?auto=format&fit=crop&w=1000&q=80');">
+            <div class="img-tint"></div>
+            <span class="project-img-emoji">🎟</span>
+            <span class="project-num">#01</span>
+          </div>
+          <div class="project-body">
+            <div class="project-app-name">TourPass</div>
+            <div class="project-title" id="tourTitle">Biglietti Turistici</div>
+            <div class="project-desc" id="tourDesc">Prenota tour guidati, scegli gli extra per ogni partecipante e scarica il biglietto PDF.</div>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">jsPDF</span>
+              <span class="tag">Flatpickr</span>
+            </div>
+            <div class="project-link-row">
+              <span class="open-btn" id="openTour">Apri progetto <span class="arrow">→</span></span>
+            </div>
+          </div>
+        </a>
+
+        <!-- BudgetPass -->
+        <a href="budgetpass\index.html" class="project-card">
+          <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=1000&q=80');">
+            <div class="img-tint"></div>
+            <span class="project-img-emoji">💰</span>
+            <span class="project-num">#02</span>
+          </div>
+          <div class="project-body">
+            <div class="project-app-name">BudgetPass</div>
+            <div class="project-title" id="budgetTitle">Pianificatore di Budget</div>
+            <div class="project-desc" id="budgetDesc">Calcola hotel, trasporti, cibo e attività con grafico delle spese, convertitore di valuta e consigli di risparmio.</div>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">jsPDF</span>
+              <span class="tag">Flatpickr</span>
+            </div>
+            <div class="project-link-row">
+              <span class="open-btn" id="openBudget">Apri progetto <span class="arrow">→</span></span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <p id="footerText">Realizzato da <span class="gold">Stefano Sciancato</span> · Gruppo 5 · PCTO 2025-2026</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
