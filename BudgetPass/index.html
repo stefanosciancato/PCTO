@@ -1,0 +1,217 @@
+<html>
+<head>
+  <title>BudgetPass | Pianificatore di Viaggio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/it.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/cs.js"></script>
+</head>
+<body>
+
+  <!-- Pulsante torna alla homepage -->
+  <a href="../index.html" class="back-home-btn">
+    ← Home
+  </a>
+
+  <div class="bg-layer" id="bgA"></div>
+  <div class="bg-layer" id="bgB"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="lang-bar">
+    <div class="lang-slider" id="langSlider"></div>
+    <button class="lang-btn active" data-lang="it">🇮🇹 IT</button>
+    <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+    <button class="lang-btn" data-lang="cs">🇨🇿 CZ</button>
+  </div>
+
+  <main class="app-wrap">
+    <section id="budgetCard" class="card">
+      <div class="card-header">
+        <div class="logo-mark">✦</div>
+        <h1 id="txt-titolo">BudgetPass</h1>
+        <p id="txt-slogan" class="slogan">Pianifica le spese, viaggia sereno</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="form-section">
+
+        <div class="form-group">
+          <label id="lbl-destinazione" for="destinazione">Destinazione</label>
+          <div class="select-wrap">
+            <select id="destinazione"></select>
+            <span class="select-icon">▾</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label id="lbl-modalita" for="calcoloMode">Modalità di calcolo</label>
+          <div class="select-wrap">
+            <select id="calcoloMode"></select>
+            <span class="select-icon">▾</span>
+          </div>
+        </div>
+
+        <div class="form-group hidden" id="groupPeopleWrap">
+          <label id="lbl-persone" for="numPersone">Numero persone</label>
+          <div class="number-input">
+            <button type="button" class="num-btn" id="peopleMinus">−</button>
+            <input type="number" id="numPersone" value="2" min="2" max="30" readonly />
+            <button type="button" class="num-btn" id="peoplePlus">+</button>
+            <span class="num-unit" id="txt-persone-unit">persone</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label id="lbl-giorni" for="dateRange">Date del viaggio</label>
+          <input type="text" id="dateRange" class="field-input" readonly autocomplete="off" placeholder="Seleziona data inizio e fine">
+          <small id="txt-giorni-unit" class="date-hint">Seleziona un intervallo per calcolare i giorni</small>
+        </div>
+
+        <div class="form-group">
+          <label id="lbl-valuta" for="valutaSelect">Valuta</label>
+          <div class="select-wrap">
+            <select id="valutaSelect"></select>
+            <span class="select-icon">▾</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="group-container hidden" id="groupContainer"></div>
+
+      <div class="spese-section" id="singleSpeseSection">
+        <div class="spese-header">
+          <span id="txt-spese-titolo" class="spese-title">Voci di spesa</span>
+          <span id="txt-spese-sub" class="spese-sub">per notte / per tratta / al giorno</span>
+        </div>
+
+        <div class="spesa-row" id="row-hotel">
+          <div class="spesa-icon">🏨</div>
+          <div class="spesa-info">
+            <label id="lbl-hotel">Hotel (per notte)</label>
+            <input type="number" class="spesa-input" id="inpHotel" min="0" placeholder="Es. 80">
+          </div>
+          <span class="spesa-total" id="tot-hotel">-</span>
+        </div>
+
+        <div class="spesa-row" id="row-trasporto">
+          <div class="spesa-icon">✈️</div>
+          <div class="spesa-info">
+            <label id="lbl-trasporto">Trasporto (totale A/R)</label>
+            <input type="number" class="spesa-input" id="inpTrasporto" min="0" placeholder="Es. 200">
+          </div>
+          <span class="spesa-total" id="tot-trasporto">-</span>
+        </div>
+
+        <div class="spesa-row" id="row-cibo">
+          <div class="spesa-icon">🍽️</div>
+          <div class="spesa-info">
+            <label id="lbl-cibo">Cibo (al giorno)</label>
+            <input type="number" class="spesa-input" id="inpCibo" min="0" placeholder="Es. 40">
+          </div>
+          <span class="spesa-total" id="tot-cibo">-</span>
+        </div>
+
+        <div class="spesa-row" id="row-attivita">
+          <div class="spesa-icon">🎭</div>
+          <div class="spesa-info">
+            <label id="lbl-attivita">Attività turistiche (al giorno)</label>
+            <input type="number" class="spesa-input" id="inpAttivita" min="0" placeholder="Es. 25">
+          </div>
+          <span class="spesa-total" id="tot-attivita">-</span>
+        </div>
+
+        <div class="spesa-row" id="row-altro">
+          <div class="spesa-icon">🛍️</div>
+          <div class="spesa-info">
+            <label id="lbl-altro">Altro / Shopping (totale)</label>
+            <input type="number" class="spesa-input" id="inpAltro" min="0" placeholder="Es. 50">
+          </div>
+          <span class="spesa-total" id="tot-altro">-</span>
+        </div>
+      </div>
+
+      <div class="price-preview" id="pricePreview">
+        <div class="preview-col">
+          <span id="txt-giornaliero-label">Budget / giorno</span>
+          <span id="dailyDisplay" class="price-amount">€0</span>
+        </div>
+        <div class="preview-divider"></div>
+        <div class="preview-col">
+          <span id="txt-totale-label">Totale viaggio</span>
+          <span id="totalDisplay" class="price-amount price-amount--main">€0</span>
+        </div>
+      </div>
+
+      <button id="btnCalcola" class="primary-btn">
+        <span id="txt-calcola">Calcola budget</span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <div id="statusMessage" class="status hidden"></div>
+    </section>
+
+    <section id="resultView" class="result-view hidden">
+      <div class="ticket-preview">
+        <div class="ticket-header">
+          <span class="ticket-logo">✦ BudgetPass</span>
+          <span class="ticket-dest" id="ticketDestDisplay"></span>
+        </div>
+
+        <div class="ticket-person-switch hidden" id="personBar">
+          <label id="lbl-person-view" for="personSelect">Persona da vedere</label>
+          <div class="select-wrap">
+            <select id="personSelect"></select>
+            <span class="select-icon">▾</span>
+          </div>
+        </div>
+
+        <div class="ticket-body" id="ticketBody"></div>
+
+        <div class="ticket-insight" id="ticketInsight"></div>
+
+        <div class="ticket-footer">
+          <span id="ticketGiorni"></span>
+          <span id="ticketTotal" class="ticket-total-label"></span>
+        </div>
+        <div class="ticket-tear"></div>
+
+        <div class="chart-wrap">
+          <canvas id="spesaChart"></canvas>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <h2 id="readyTitle">Budget pronto!</h2>
+        <p id="readyText">Ecco il tuo piano di spesa. Scarica il PDF per averlo sempre con te.</p>
+
+        <div class="tips-box" id="tipsBox"></div>
+
+        <a id="downloadPdfLink" class="primary-btn" href="#" download>
+          <span id="txt-download">⬇ Scarica PDF</span>
+        </a>
+
+        <button id="backBtn" class="secondary-btn">
+          ← <span id="txt-back">Torna indietro</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
